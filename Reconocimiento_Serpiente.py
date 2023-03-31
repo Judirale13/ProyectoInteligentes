@@ -7,7 +7,6 @@ x = 415
 y = 230
 width = 580
 height = 500
-
 # Definir una función para encontrar la comida en la imagen del juego
 def find_snake(image):
     # Convertir la imagen a formato HSV

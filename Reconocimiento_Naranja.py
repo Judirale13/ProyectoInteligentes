@@ -22,7 +22,7 @@ def  find_food(image):
 
     # Aplicar la máscara para detectar la manzana (naranja)
     mask = cv2.inRange(hsv_image, lower_orange, upper_orange)
-    #cv2.imshow('Game Image', hsv_image)
+    #cv2.imshow('Game Image', mask)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
     # Aplicar un filtro Gaussiano para reducir el ruido

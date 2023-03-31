@@ -13,10 +13,22 @@ width = 580
 height = 500
 
 
+def adjust_direction(direction, x, y, width, height):
+    # Ajustar la dirección si la serpiente está cerca de los límites de la ventana
+    if direction == 'up' and y < 50:
+        direction = 'right'
+    elif direction == 'down' and y > height - 50:
+        direction = 'left'
+    elif direction == 'left' and x < 50:
+        direction = 'up'
+    elif direction == 'right' and x > width - 50:
+        direction = 'down'
+    return direction
 
-def move_snake(direction):
+def move_snake(direction, x, y, width, height):
     print("calculando")
-    global snake_position
+    # Ajustar la dirección de la serpiente si está cerca de los límites de la ventana
+    direction = adjust_direction(direction, x, y, width, height)
     
     # Obtener la tecla correspondiente a la dirección
     if direction == 'up':
@@ -29,6 +41,9 @@ def move_snake(direction):
         key = 'right'
     else:
         return
+    # Simular la pulsación de la tecla correspondiente
+    pyautogui.press(key)
+
 
 while True:
 # Tomar una captura de pantalla del área de la ventana que contiene el juego
@@ -42,18 +57,17 @@ while True:
     if food_position is not None:
         
         direction = calculate_direction(snake_position, food_position)
-        print("Posición de la comida: ", food_position)
-        print("Posición de la snake: ", snake_position)
+        #print("Posición de la comida: ", food_position)
+        #print("Posición de la snake: ", snake_position)
     else:
         print("No se encontró comida en la imagen.")
     # Emitir una orden de movimiento a la serpiente para que se mueva en la dirección adecuada
 
     
-    direction = calculate_direction(snake_position, food_position)
+    #direction = calculate_direction(snake_position, food_position)
     print(direction)
     # Mover la serpiente hacia la comida
-    move_snake(direction)
+    move_snake(direction, x, y, width, height)
     # Esperar un breve periodo de tiempo para que la serpiente tenga tiempo de moverse antes de repetir el proceso
-    time.sleep(0.1)
+    time.sleep(0.01)
   
-
