@@ -4,14 +4,14 @@ import numpy as np
 import time
 
 
-x = 415
-y = 230
-width = 580
-height = 500
-
+x = 60
+y = 430
+width = 1080
+height = 950
+cell_size = 64
 
 # Definir una función para encontrar la comida en la imagen del juego
-def  find_food(image):
+def find_food(image):
    
     # Convertir la imagen a formato HSV
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -41,7 +41,10 @@ def  find_food(image):
         if moments['m00'] > 0:
             cx = int(moments['m10'] / moments['m00'])
             cy = int(moments['m01'] / moments['m00'])
-            return cx, cy
+            for x in range(width):
+                for y in range(height):# Red pixel for the fruit
+                    fruit_position = (cx // cell_size, cy // cell_size)
+            return fruit_position
     
     # Si no se detectó ningún contorno, devolver None
     return None
